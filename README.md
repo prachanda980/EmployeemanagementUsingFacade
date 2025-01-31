@@ -48,6 +48,7 @@ app.Run();
 ```csharp
 public interface IEmployeeFacade
 {
+    object Employee()
     object GetEmployeeByid(int id);
     object GetEmployeeDetails(int id);
     object AddEmployee(Employee employee);
@@ -94,6 +95,12 @@ public class EmployeeController : ControllerBase
         _employeeFacade = employeeFacade;
     }
 
+     [HttpGet("employeeList")]
+    public IActionResult GetEmployeeById(int id)
+    {
+        var employee = _employeeFacade.GetAllEmployee();
+        return ok(employee);
+    }
     [HttpGet("{id}")]
     public IActionResult GetEmployeeById(int id)
     {
